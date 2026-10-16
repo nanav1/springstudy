@@ -1,0 +1,12 @@
+.board-title {
+    height: 100px;
+    line-height: 100px;
+    font-size: 3em;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* 행의 밑줄 */
+.list>.row {
+    border-bottom: 1px solid #bbb;
+}

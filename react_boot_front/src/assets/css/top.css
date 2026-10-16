@@ -1,0 +1,40 @@
+/* 로그인, 로그아웃, 고객센터 */
+.top-menu {
+    display: flex;
+    justify-content: flex-end;
+    background-color: #ddd;
+}
+
+.top-menu>div {
+    padding-left: 20px;
+}
+
+/* 시사로고 */
+.main-logo {
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    font-size: 3em;
+}
+
+/* 메인메뉴 */
+.main-menu {
+    display: flex;
+    justify-content: center;
+    background-color: plum;
+}
+
+.main-menu>div {
+    height: 60px;
+    line-height: 60px;
+    font-size: 1.2em;
+    padding: 0 20px;
+}
+
+.main-menu a, .api-menu a{
+    color: white;
+}
+
+.main-menu a:hover, .api-menu a:hover{
+    color: purple;
+}
