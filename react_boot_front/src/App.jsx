@@ -23,7 +23,8 @@ import ApiLayout from "./assets/apiPages/ApiLayout"
 import ApiHome from "./assets/apiPages/ApiHome"
 import KakaoMap from "./assets/apiPages/KakaoMap"
 import EmailNaver from "./assets/apiPages/EmailNaver"
-
+import Crawling from "./assets/apiPages/Crawling"
+import AlbumDetail from "./assets/apiPages/albumDetail"
 
 function App() {
 
@@ -56,8 +57,10 @@ function App() {
           <Route index element={<ApiHome/>}></Route>
           <Route path="/openapi/apilayout/kakaomap" element={<KakaoMap/>}></Route>
           <Route path="/openapi/apilayout/email" element={<EmailNaver/>}></Route>
-        
+          <Route path="/openapi/apilayout/crwaling" element={<Crawling/>}></Route>
         </Route>
+        <Route path="/album/detail/:albumNo" element={<AlbumDetail />} />
+
         <Route path="/admin/home" element={<AdminLayout />}>
           <Route index element={<MemberList />}></Route>
           {/* <Route path="/memberList" element={<MemberList />}></Route> */}
