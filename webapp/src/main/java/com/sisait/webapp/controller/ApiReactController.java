@@ -34,7 +34,6 @@ public class ApiReactController {
             Elements elements = doc.select("tr.lst50,tr.lst100");
 
             for(Element element : elements){
-                //순위
                 String rank = element.select("span.rank").text();
                 String postImage = element.select("a.image_typeAll img").attr("src");
                 String songName = element.select("div.rank01>span>a").text();
@@ -66,8 +65,8 @@ public class ApiReactController {
     }
 
     @GetMapping("/albumDetail")
-    public Map<String, Object> albumDetail(@RequestParam("albumNo") String id) {
-        Map<String, Object> albumDetailData = new HashMap<>();
+    public List<Map<String, String>> albumDetail(@RequestParam("albumNo") String id) {
+        List<Map<String, String>> albumDetailData = new ArrayList<Map<String, String>>();
 
         try {
             String url = "https://www.melon.com/album/detail.htm?albumId=" + id;
@@ -75,6 +74,50 @@ public class ApiReactController {
             Connection connect = Jsoup.connect(url);
 
             Document doc = connect.get();
+
+            Elements elements = doc.select("div.wrap_info");
+
+            for(Element element : elements){
+                String albumName = element.selectFirst("div.song_name").ownText().trim();
+                String albumImg = element.selectFirst("div.thumb img").attr("src");
+                String artistCode = element.selectFirst("a.artist_name").attr("href").replaceAll("[^0-9]", "");
+//                String artist = element.selectFirst("div.artist").ownText().trim();
+                String artist = element.select("div.artist a.artist_name").stream().map(Element::text).map(String::trim).collect(java.util.stream.Collectors.joining(", "));
+                String releaseDate = element.selectFirst("dt:contains(발매일) + dd") != null ? element.selectFirst("dt:contains(발매일) + dd").text().trim() : "";
+                String genre = element.selectFirst("dt:contains(장르) + dd") != null ? element.selectFirst("dt:contains(장르) + dd").text().trim() : "";
+                String publisher = element.selectFirst("dt:contains(발매사) + dd") != null ? element.selectFirst("dt:contains(발매사) + dd").text().trim() : "";
+                String agency = element.selectFirst("dt:contains(기획사) + dd") != null ? element.selectFirst("dt:contains(기획사) + dd").text().trim() : "";
+
+                Map<String, String> map = new HashMap<String ,String>();
+                map.put("albumName", albumName);
+                map.put("artistCode",artistCode);
+                map.put("artist",artist);
+                map.put("albumImg", albumImg);
+                map.put("releaseDate", releaseDate);
+                map.put("genre", genre);
+                map.put("publisher", publisher);
+                map.put("agency", agency);
+
+                albumDetailData.add(map);
+            }
+
+            Elements songRows = doc.select("div.service_list_song tbody tr");
+
+            for (Element tr : songRows) {
+                    String trackTitle = tr.selectFirst("a[href*=playSong]") != null ? tr.selectFirst("a[href*=playSong]").text().trim() : "";
+                    String trackArtist = tr.select("a[href*=goArtistDetail]").stream().map(Element::text).map(String::trim).distinct().collect(java.util.stream.Collectors.joining(", "));
+                    String songNum = tr.selectFirst("input.input_check").val();
+                    String likey = tr.selectFirst("span.cnt").ownText();
+
+
+                    Map<String, String> map = new HashMap<String ,String>();
+                    map.put("trackTitle",trackTitle);
+                    map.put("trackArtist",trackArtist);
+                    map.put("songNum", songNum);
+                    map.put("likey",likey);
+
+                    albumDetailData.add(map);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
