@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@stomp/stompjs": "^7.5.0",
     "@toast-ui/editor-plugin-color-syntax": "^3.1.0",
     "@toast-ui/react-editor": "^3.2.3",
     "axios": "^1.20.0",
@@ -18,7 +19,9 @@
     "react-bootstrap": "^2.10.10",
     "react-dom": "^17.0.2",
     "react-icons": "^5.7.0",
-    "react-router-dom": "^6.30.1"
+    "react-router-dom": "^6.30.1",
+    "sockjs-client": "^1.6.1",
+    "websocket": "^1.0.35"
   },
   "devDependencies": {
     "@types/react": "^17.0.27",

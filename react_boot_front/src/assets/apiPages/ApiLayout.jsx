@@ -15,6 +15,7 @@ function ApiLayout() {
             <div><Link to="/openapi/apilayout/kakaomap">카카오맵</Link></div>
             <div><Link to="/openapi/apilayout/email">이메일보내기</Link></div>
             <div><Link to="/openapi/apilayout/crwaling">멜론</Link></div>
+            <div><Link to="/openapi/apilayout/chatting">채팅</Link></div>
         </div>
         <div className="col-sm-10 p-0">
           <Outlet/>

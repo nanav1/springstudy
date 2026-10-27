@@ -1,0 +1,413 @@
+
+/* ==========================
+   채팅창 전체 기본 설정
+========================== */
+
+#chat-wrap,
+#chat-wrap * {
+  font-family: 'Noto Sans KR', 'Segoe UI',
+    'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  box-sizing: border-box;
+}
+
+#chat-wrap * {
+  font-size: 14px;
+}
+
+/* 채팅창 전체 */
+#chat-wrap {
+  width: 500px;
+  height: 620px;
+
+  background-color: rgb(241, 239, 239);
+
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+
+  margin: 0;
+  padding: 15px;
+
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+  z-index: 1000;
+}
+
+/* ==========================
+   상단 닫기 버튼
+========================== */
+
+#chat {
+  width: 100%;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  flex-shrink: 0;
+  margin-bottom: 10px;
+}
+
+.chat-close {
+  cursor: pointer;
+  padding: 7px 12px;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.chat-close:hover {
+  background-color: #ddd;
+}
+
+.chat-close strong {
+  font-weight: 600;
+}
+
+/* ==========================
+   채팅 대화 출력 영역
+========================== */
+
+#dialog {
+  width: 100%;
+
+  flex: 1;
+  min-height: 0;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  position: relative;
+
+  border-radius: 10px;
+  background-color: #b2bbf185;
+
+  padding: 15px 12px;
+}
+
+/* 메시지 목록 */
+#dialog .dialog-board {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  gap: 10px;
+
+  width: 100%;
+  min-height: 100%;
+}
+
+/* ==========================
+   채팅 말풍선 공통
+========================== */
+
+#dialog .me,
+#dialog .other {
+  display: flex;
+  flex-direction: column;
+
+  width: fit-content;
+  max-width: 75%;
+
+  padding: 10px 13px;
+  border-radius: 10px;
+
+  line-height: 1.5;
+
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* 내가 보낸 메시지 */
+#dialog .me {
+  align-self: flex-end;
+
+  background-color: #ffdb31;
+  color: #222;
+
+  border-top-right-radius: 3px;
+}
+
+/* 상대방 메시지 */
+#dialog .other {
+  align-self: flex-start;
+
+  background-color: #fff;
+  color: #222;
+
+  border-top-left-radius: 3px;
+}
+
+/* 보낸 사람 이름 */
+#dialog .me span:first-child,
+#dialog .other span:first-child {
+  font-weight: bold;
+  margin-bottom: 3px;
+}
+
+/* 기존 닉네임 이탤릭 해제 */
+#dialog i {
+  font-style: normal;
+}
+
+/* 날짜 및 시간 */
+#dialog .date {
+  color: #777;
+  font-size: 11px;
+  margin: 3px 0;
+  padding: 0;
+}
+
+/* 입장 / 퇴장 안내문 */
+#dialog .system-message {
+  align-self: center;
+
+  width: fit-content;
+  max-width: 90%;
+
+  padding: 6px 12px;
+
+  background-color: rgba(80, 90, 110, 0.35);
+  color: white;
+
+  border-radius: 20px;
+
+  font-size: 12px;
+  text-align: center;
+}
+
+/* ==========================
+   닉네임 입력 영역
+========================== */
+
+#divSender {
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin-top: 12px;
+  flex-shrink: 0;
+}
+
+#divSender label,
+#divMessage label {
+  width: 60px;
+  flex-shrink: 0;
+
+  text-align: center;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+/* 닉네임 입력 */
+#senderInput {
+  flex: 1;
+  min-width: 0;
+
+  height: 40px;
+
+  padding: 0 12px;
+
+  border: 1px solid #ccc;
+  border-radius: 5px;
+
+  background-color: #fff;
+  outline: none;
+}
+
+#senderInput:focus {
+  border-color: #f7a903;
+}
+
+#senderInput:disabled {
+  background-color: #e7e7e7;
+}
+
+/* 입장 버튼 */
+#btnJoin {
+  width: 65px;
+  height: 40px;
+
+  flex-shrink: 0;
+
+  border: none;
+  border-radius: 5px;
+
+  background-color: rgb(126, 124, 128);
+  color: white;
+
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#btnJoin:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ==========================
+   메시지 입력 영역
+========================== */
+
+#divMessage {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-top: 8px;
+  flex-shrink: 0;
+}
+
+/* 메시지 입력 */
+#messageInput {
+  flex: 1;
+  min-width: 0;
+
+  height: 70px;
+
+  padding: 10px;
+
+  border: 1px solid #f7a903;
+  border-radius: 5px;
+
+  background-color: #fff;
+
+  resize: none;
+  outline: none;
+
+  line-height: 1.5;
+}
+
+#messageInput:disabled {
+  background-color: #e7e7e7;
+}
+
+/* 메시지 전송 버튼 */
+#btnSend {
+  width: 65px;
+  height: 70px;
+
+  flex-shrink: 0;
+
+  border: none;
+  border-radius: 5px;
+
+  background-color: rgb(250, 171, 2);
+  color: white;
+
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#btnSend:hover:not(:disabled) {
+  background-color: #e69a00;
+}
+
+#btnSend:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ==========================
+   채팅 아이콘
+========================== */
+
+#chat_icon {
+  position: fixed;
+
+  right: 30px;
+  bottom: 30px;
+
+  width: 70px;
+  height: 70px;
+
+  object-fit: contain;
+
+  cursor: pointer;
+  z-index: 1000;
+
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+  transition: transform 0.2s;
+}
+
+#chat_icon:hover {
+  transform: scale(1.08);
+}
+
+/* ==========================
+   스크롤바
+========================== */
+
+#dialog::-webkit-scrollbar {
+  width: 6px;
+}
+
+#dialog::-webkit-scrollbar-thumb {
+  background-color: #aaa;
+  border-radius: 10px;
+}
+
+#dialog::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/* ==========================
+   모바일 대응
+========================== */
+
+@media (max-width: 550px) {
+  #chat-wrap {
+    width: calc(100vw - 20px);
+    height: min(620px, 85dvh);
+
+    right: 10px;
+    bottom: 10px;
+
+    padding: 10px;
+  }
+
+  #divSender label,
+  #divMessage label {
+    width: 45px;
+    font-size: 12px;
+  }
+
+  #btnJoin,
+  #btnSend {
+    width: 55px;
+  }
+
+  #chat_icon {
+    width: 60px;
+    height: 60px;
+    right: 15px;
+    bottom: 15px;
+  }
+}
+/* 입장 / 퇴장 메시지 */
+#dialog .dialog-board .system-message {
+    align-self: center;
+
+    width: fit-content;
+    max-width: 90%;
+
+    background-color: rgba(60, 75, 100, 0.35);
+    color: white;
+
+    padding: 6px 14px;
+    border-radius: 20px;
+
+    font-size: 12px;
+    text-align: center;
+
+    margin: 4px 0;
+}
